@@ -59,8 +59,7 @@ def dashboard():
     data = {
         'id': session['user_id']
     }
-    current_user = artist.User.get_one(data)
-    return render_template('dashboard.html', current_user = current_user, paintings = Painting.get_all())
+    return render_template('dashboard.html', user = artist.User.get_one(data), paintings = Painting.get_all())
 
 @app.route('/logout')
 def logout():

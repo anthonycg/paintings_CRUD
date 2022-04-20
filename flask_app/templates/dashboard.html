@@ -11,7 +11,7 @@
     <!-- Common types: table class='table-striped', button class='btn btn-primary secondary success danger warning info light dark'  -->
     <div class='container' style="display: flex;">
         <div class="col">
-            <h2>Welcome, {{current_user.first_name}}!</h2>
+            <h2>Welcome, {{user.first_name}}!</h2>
             <h5>Paintings</h5>
             <table class="table table-striped" style="border: solid black 1px;">
                 <thead>
@@ -25,7 +25,7 @@
                     {% for painting in paintings %}
                     <tr>
                         <td><a href="/painting/{{painting.title}}">{{painting.title}}</a></td>
-                        <td>{{current_user.first_name}} {{current_user.last_name}}</td> 
+                        <td>{{user.first_name}} {{user.last_name}}</td> 
                         <td>
                             <a href="/destroy/painting/{{painting.title}}">delete</a>
                             <a href="/edit/painting/{{painting.title}}">edit</a>

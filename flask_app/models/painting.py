@@ -46,6 +46,12 @@ class Painting:
         return cls(results[0])
 
     @classmethod
+    def get_all_paintings_by_artist(cls):
+        query = "SELECT * FROM artists LEFT JOIN paintings ON paintings.user_id = artists.id WHERE arists.id = %(id)s;"
+        results = connectToMySQL(cls.database_name).query_db(query)
+        return cls(results[0])
+
+    @classmethod
     def update(cls, data):
         query = "UPDATE paintings SET title=%(title)s, description=%(description)s, price=%(price)s, updated_at=NOW() WHERE id = %(id)s;"
         results = connectToMySQL(cls.database_name).query_db(query, data)
