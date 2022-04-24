@@ -22,7 +22,7 @@
             {% endwith %}
         </div>
             <div class="col-2">
-                <form action="/update/painting/{{painting.title}}" method="post">
+                <form action="/update/painting/{{painting.id}}" method="post">
                     <label for="title">Title</label>
                     <input type="text" name="title" id="title" value="{{painting.title}}">
                     <label for="description">description</label>
@@ -33,7 +33,7 @@
                 </form>
             </form>
         </div>
-        <div class="col">
+        <div class="col" style="margin-top: 20px;">
             <a href="/dashboard"><button class="btn btn-success">Dashboard</button> </a>
             <a href="/"><button class="btn btn-warning">Logout</button></a>
         </div>

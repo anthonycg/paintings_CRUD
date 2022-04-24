@@ -24,11 +24,12 @@
                 <tbody>
                     {% for painting in paintings %}
                     <tr>
-                        <td><a href="/painting/{{painting.title}}">{{painting.title}}</a></td>
-                        <td>{{user.first_name}} {{user.last_name}}</td> 
+                        <td><a href="/painting/{{painting.id}}">{{painting.title}}</a></td>
+                        <td>{{painting.user.first_name}} {{painting.user.last_name}}</td> 
                         <td>
-                            <a href="/destroy/painting/{{painting.title}}">delete</a>
-                            <a href="/edit/painting/{{painting.title}}">edit</a>
+                            <!-- if painting.user_id == session['user_id'], show these actions -->
+                            <a href="/destroy/painting/{{painting.id}}">delete</a>
+                            <a href="/edit/painting/{{painting.id}}">edit</a>
                         </td>
                     </tr>
                     {% endfor %}

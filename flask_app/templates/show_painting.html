@@ -11,7 +11,7 @@
     <div class='container'>
         <div class="col">
             <h2>{{painting.title}}</h2>
-            <p>Painted by: {{current_user.first_name}} {{current_user.last_name}}</p>
+            <p>Painted by: {{painting.user.first_name}} {{painting.user.last_name}}</p>
             <h5>Description:</h5>
             <p>{{painting.description}}</p>
             <p>Price: {{painting.price}}</p>

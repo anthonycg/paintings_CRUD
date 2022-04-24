@@ -32,6 +32,8 @@ def register():
     id = artist.User.save(data)
     #store user id into session
     session['user_id'] = id
+    print(session['user_id'])
+    print(id)
     return redirect ('/dashboard')
 
 @app.route('/login', methods = ['POST'])
@@ -56,10 +58,13 @@ def dashboard():
     #check if user_id is not in seesion
     if 'user_id' not in session:
         return redirect('/logout')
-    data = {
+    # data = {
+    #     "id": id
+    # }
+    session_data = {
         'id': session['user_id']
     }
-    return render_template('dashboard.html', user = artist.User.get_one(data), paintings = Painting.get_all())
+    return render_template('dashboard.html', user = artist.User.get_one(session_data), paintings = Painting.get_all_paintings_by_artist())
 
 @app.route('/logout')
 def logout():

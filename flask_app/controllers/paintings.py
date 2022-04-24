@@ -40,23 +40,23 @@ def create_painting():
 
 
 
-@app.route('/edit/painting/<string:title>')
-def edit(title):
+@app.route('/edit/painting/<int:id>')
+def edit(id):
     #check if user is in session
     if 'user_id' not in session:
         return redirect('/logout')
     #declare needed data
     data = {
-        "title": title
+        "id": id
     }
     session_data = {
         "id":session['user_id']
     }
-    return render_template('edit_painting.html', painting=Painting.get_one_by_title(data), current_user=artist.User.get_one(session_data))
+    return render_template('edit_painting.html', painting=Painting.get_one(data), current_user=artist.User.get_one(session_data))
 
 
-@app.route('/update/painting/<string:title>', methods=['POST'])
-def update_painting(title):
+@app.route('/update/painting/<int:id>', methods=['POST'])
+def update_painting(id):
     if 'user_id' not in session:
         return redirect('/logout')
     #validate user inputs
@@ -64,7 +64,7 @@ def update_painting(title):
         return redirect('/new/painting')
     #declare needed data
     data = {
-        "title":title,
+        "id":id,
         # "id": request.form['id'],
         "title": request.form['title'],
         "description": request.form['description'],
@@ -72,33 +72,33 @@ def update_painting(title):
         # "user_id": session['user_id']
     }
     #invoke method save updates
-    Painting.update_by_title(data)
+    Painting.update(data)
     return redirect('/dashboard')
 
-@app.route('/painting/<string:title>')
-def show_painting(title):
+@app.route('/painting/<int:id>')
+def show_painting(id):
     #check if user is in session
     if 'user_id' not in session:
         return redirect('/logout')
     #declare needed data
     data = {
-        "title": title
+        "id": id
     }
     session_data = {
         "id":session['user_id']
     }
     #invoke method to grab painting with specified id
-    painting = Painting.get_one_by_title(data)
+    painting = Painting.get_one_paintings_by_artist(data)
     return render_template('show_painting.html', painting = painting, current_user = artist.User.get_one(session_data))
 
-@app.route('/destroy/painting/<string:title>')
-def dunzo(title):
+@app.route('/destroy/painting/<int:id>')
+def dunzo(id):
     #user must be in session bc anyone could delete paintings without logging in otherwise
     if 'user_id' not in session:
         return redirect('/logout')
     #declare needed data we need to delete record
     data = {
-        "title": title
+        "id": id
     }
     #invoke delete method
     Painting.dunzo_by_title(data)
